@@ -1,17 +1,19 @@
-//function sayName () {
-    //console.log('N'),
-   // console.log('A'),
-    //console.log('N'),
-    //console.log('D'),
-    //console.log('U');
-//}
+// Function to print name letter by letter
+function sayName() {
+    console.log('N');
+    console.log('A');
+    console.log('N');
+    console.log('D');
+    console.log('U');
+}
 
-//sayName()
+sayName();
 
-//function AddNUmber(number1, number2){
-    //console.log(number1 + number2)
-//}
-//AddNUmber(4, 5)
+// Function to add two numbers and log the result
+function AddNUmber(number1, number2) {
+    console.log(number1 + number2);
+}
+AddNUmber(4, 5);
 
 // This function adds two numbers and returns the result
 function AddTwoNumber(number1, number2) {
@@ -82,3 +84,60 @@ async function fetchData() {
     });
 }
 fetchData().then(result => console.log("Async Function:", result));
+
+const username = {
+    username: "Nandu",
+    price: 234
+};
+
+function handle(user) {
+    console.log(`username is ${user.username} and the price is ${user.price}`);
+}
+
+handle(username);
+
+const myNewArray = [200, 300, 400]
+
+function newArray(getArray){
+    return getArray[1]
+    
+}
+console.log(newArray(myNewArray));
+
+// Closure: A function that remembers its outer scope
+function outerFunction(outerVariable) {
+    return function innerFunction(innerVariable) {
+        console.log('Outer variable:', outerVariable);
+        console.log('Inner variable:', innerVariable);
+    };
+}
+const newFunction = outerFunction('outside');
+newFunction('inside'); // Output: Outer variable: outside, Inner variable: inside
+
+// IIFE: Immediately Invoked Function Expression
+(function() {
+    console.log('This is an IIFE!');
+})();
+
+// Recursive Function: A function that calls itself
+function factorial(n) {
+    if (n === 0 || n === 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+console.log('Factorial of 5:', factorial(5)); // Output: 120
+
+// Higher-Order Function: A function that takes another function as an argument
+function applyOperation(a, b, operation) {
+    return operation(a, b);
+}
+function add(a, b) {
+    return a + b;
+}
+function multiply(a, b) {
+    return a * b;
+}
+console.log('Add:', applyOperation(5, 3, add)); // Output: 8
+console.log('Multiply:', applyOperation(5, 3, multiply)); // Output: 15
