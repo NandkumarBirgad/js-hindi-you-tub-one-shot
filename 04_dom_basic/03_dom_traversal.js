@@ -288,3 +288,123 @@ function demonstrateTraversalUtilities() {
         let current = element.parentElement;
         while (current) {
             ancestors.push(current);
+            current = current.parentElement;
+        }
+        return ancestors;
+    }
+
+    // Get all descendants
+    function getDescendants(element) {
+        const descendants = [];
+        const children = element.querySelectorAll('*');
+        children.forEach(child => descendants.push(child));
+        return descendants;
+    }
+
+    // Get element depth
+    function getElementDepth(element) {
+        let depth = 0;
+        let current = element.parentElement;
+        while (current) {
+            depth++;
+            current = current.parentElement;
+        }
+        return depth;
+    }
+
+    // Find element by text content
+    function findByTextContent(text, parent = document) {
+        return parent.querySelector(`*:contains("${text}")`);
+    }
+
+    console.log("getAncestors(element) - Get all ancestor elements");
+    console.log("getDescendants(element) - Get all descendant elements");
+    console.log("getElementDepth(element) - Get element depth from root");
+    console.log("findByTextContent(text) - Find element containing text");
+}
+
+// ==========================================
+// 6. PERFORMANCE OPTIMIZATION
+// ==========================================
+
+console.log("\n=== PERFORMANCE OPTIMIZATION ===");
+
+// 6.1 Efficient traversal patterns
+function demonstrateEfficientTraversal() {
+    console.log("=== EFFICIENT TRAVERSAL PATTERNS ===");
+
+    console.log("=== CACHE SELECTORS ===");
+    console.log("❌ Repeated: document.querySelector('.item') multiple times");
+    console.log("✅ Cached: const items = document.querySelectorAll('.item')");
+
+    console.log("\n=== USE SPECIFIC SELECTORS ===");
+    console.log("❌ Slow: document.querySelectorAll('*')");
+    console.log("✅ Fast: document.querySelectorAll('.specific-class')");
+    console.log("🚀 Fastest: document.getElementById('unique-id')");
+
+    console.log("\n=== LIMIT SEARCH SCOPE ===");
+    console.log("❌ document.querySelectorAll('.item') - Searches entire document");
+    console.log("✅ container.querySelectorAll('.item') - Searches within container");
+
+    console.log("\n=== USE MODERN METHODS ===");
+    console.log("✅ element.closest() - More efficient than walking up manually");
+    console.log("✅ element.querySelector() - More efficient than getElementsBy*");
+}
+
+// 6.2 Avoiding common performance pitfalls
+function demonstratePerformancePitfalls() {
+    console.log("\n=== PERFORMANCE PITFALLS TO AVOID ===");
+
+    console.log("=== PITFALL 1: Reflows during traversal ===");
+    console.log("❌ for (let el of elements) { el.style.display = 'none'; } // Multiple reflows");
+    console.log("✅ elements.forEach(el => el.style.display = 'none'); // Single reflow");
+
+    console.log("\n=== PITFALL 2: Unnecessary DOM queries ===");
+    console.log("❌ for (let i = 0; i < items.length; i++) {");
+    console.log("     const item = document.querySelector('.item-' + i); // Repeated queries");
+    console.log("   }");
+    console.log("✅ const items = document.querySelectorAll('.item'); // Single query");
+
+    console.log("\n=== PITFALL 3: Inefficient loops ===");
+    console.log("❌ for (let i = 0; i < container.children.length; i++) { // Length checked each time");
+    console.log("     const child = container.children[i];");
+    console.log("   }");
+    console.log("✅ for (let child of container.children) { // More efficient");
+}
+
+// ==========================================
+// 7. REAL-WORLD EXAMPLES
+// ==========================================
+
+console.log("\n=== REAL-WORLD TRAVERSAL EXAMPLES ===");
+
+// 7.1 Event delegation helper
+function demonstrateEventDelegation() {
+    console.log("=== EVENT DELEGATION HELPER ===");
+
+    function findClosestParentWithClass(element, className) {
+        return element.closest(`.${className}`);
+    }
+
+    function getEventTarget(event, selector) {
+        return event.target.closest(selector);
+    }
+
+    console.log("findClosestParentWithClass(element, 'container') - Find container");
+    console.log("getEventTarget(event, '.button') - Find button that was clicked");
+}
+
+// 7.2 Form validation traversal
+function demonstrateFormValidation() {
+    console.log("\n=== FORM VALIDATION TRAVERSAL ===");
+
+    function validateForm(form) {
+        const inputs = form.querySelectorAll('input, textarea, select');
+        const errors = [];
+
+        inputs.forEach(input => {
+            if (input.hasAttribute('required') && !input.value.trim()) {
+                errors.push(`${input.name || input.id} is required`);
+            }
+        });
+
